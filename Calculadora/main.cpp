@@ -6,7 +6,13 @@
 
 #include <tchar.h>
 #include <windows.h>
+#include <commctrl.h>
+#include <winuser.h>
 /*  Declare Windows procedure  */
+#define bt1 101
+#define bt2 102
+#define bt3 103
+#define bt4 104
 
 HWND ventana; /* This is the handle for our window */
 LRESULT CALLBACK WindowProcedure(HWND, UINT, WPARAM, LPARAM);
@@ -83,12 +89,24 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
     case WM_DESTROY:
         PostQuitMessage(0); /* send a WM_QUIT to the message queue */
         break;
+
     case WM_CREATE:
-        boton1 = CreateWindowEx(0, "button", "Suma", WS_VISIBLE | WS_CHILD | 0, 10, 0, 80, 25, ventana, 0, 0, 0);
+        boton1 = CreateWindowEx(0, "Button", "Suma", BS_CENTER | WS_VISIBLE | WS_CHILD | 10, 10, 0, 80, 25, ventana, (HMENU)bt1, NULL, NULL);
+        boton2 = CreateWindowEx(0, "Button", "Resta", BS_CENTER | WS_VISIBLE | WS_CHILD | 10, 35, 30, 80, 25, ventana, (HMENU)bt2, NULL, NULL);
+        boton1 = CreateWindowEx(0, "Button", "Multiplicacion", BS_CENTER | WS_VISIBLE | WS_CHILD | 0, 10, 50, 80, 25, ventana, (HMENU)bt3, NULL, NULL);
+        boton2 = CreateWindowEx(0, "Button", "Division", BS_CENTER | WS_VISIBLE | WS_CHILD | 0, 10, 60, 80, 25, ventana, (HMENU)bt3, NULL, NULL);
         break;
+
     case WM_COMMAND:
-        boton1 = CreateWindowEx(0, "button", "Resta", WS_VISIBLE | WS_CHILD | 0, 10, 30, 80, 25, ventana, 0, 0, 0);
+        if (LOWORD(bt1) == wParam)
+        {
+        }
+        else
+        {
+            PostQuitMessage(0);
+        }
         break;
+
     default: /* for messages that we don't deal with */
         return DefWindowProc(hwnd, message, wParam, lParam);
     }
